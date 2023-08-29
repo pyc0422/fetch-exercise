@@ -1,6 +1,6 @@
 const base_url = "https://frontend-take-home-service.fetch.com"
 
-const options = { headers:{'Content-Type': 'application/json'}}
+const options = {headers:{'Content-Type': 'application/json', "Access-Control-Allow-Origin" : "*"}}
 const getAuth = async ({name, email}:{name:string, email:string}) => {
   try {
     const auth = await fetch(`${base_url}/auth/login`, {...options, method: 'post',  body: JSON.stringify({name, email}), credentials: 'include'})
@@ -36,11 +36,21 @@ const getBreeds = async () => {
   }
 }
 
-const getDogsId = async (endpoint: string) => {
+type getIdParams = {
+  breeds?:string;
+  zipCodes?:string;
+  ageMin:number;
+  ageMax:number;
+  size?:number;
+  from?:number;
+  sort?:string;
+}
+const getDogsId = async (params:Record<string,string>) => {
 
-  const res = await fetch(base_url + endpoint, {...options, credentials: 'include'})
+  // const res = await fetch(base_url + endpoint, {...options, credentials: 'include'})
+  const res = await fetch(`${base_url}/dogs/search?` + new URLSearchParams(params), {...options, credentials: 'include'})
   if (res.ok) {
-
+    console.log('res:', res)
     return res.json()
   }
   return res.status

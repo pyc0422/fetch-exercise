@@ -15,8 +15,9 @@ export default function LogOut () {
 
   }
   return (
-    <div className="m-2">
-     <button className="border border-1 border-primary px-4 py-2 hover:opacity-80" onClick={handleLogOut}>Log Out</button>
+    <div className="mt-4 mb-8 flex justify-evenly">
+      <div>Hi, {user.name.toUpperCase()}</div>
+     <button className="text-xs rounded border border-1 border-gray-400 px-4 hover:opacity-80" onClick={handleLogOut}>Log Out</button>
     </div>
   )
 }
