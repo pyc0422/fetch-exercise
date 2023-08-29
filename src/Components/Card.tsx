@@ -17,11 +17,9 @@ export default function Card ({dog}: {dog:Dog}) {
       denyButtonColor:'#F9A826',
     }).then((result)=>{
       if (result.isConfirmed) {
-        console.log(user)
         setUser({...user, dogs:user.dogs.concat(dog)})
         return 'adopted'
       } else if (result.isDenied) {
-        console.log(user)
         setUser({...user, saved:user.saved.concat(dog)})
         return 'saved'
       }

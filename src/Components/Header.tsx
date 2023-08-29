@@ -21,11 +21,9 @@ export default function Header ({Ids, dogs}:{Ids:string[], dogs:Array<Dog>}) {
       denyButtonText:'Unsave',
     }).then((result)=>{
       if (result.isConfirmed) {
-        console.log(user)
         setUser({...user, dogs:user.dogs.concat(dog)})
         return 'adopted'
       } else if (result.isDenied) {
-        console.log(user)
         setUser({...user, saved:user.saved.filter(item => item.id !== dog.id)})
         return 'moved'
       }

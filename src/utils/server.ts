@@ -40,7 +40,6 @@ const getBreeds = async () => {
 
 const getMatch = async (IDs:Array<string>) => {
   try{
-    console.log(IDs)
     const res = await fetch(`${base_url}/dogs/match`, {...options, credentials: 'include', method:'post', body: JSON.stringify(IDs)})
     if (res && res.ok) {
       return res.json()
@@ -53,11 +52,9 @@ const getMatch = async (IDs:Array<string>) => {
 }
 
 const getDogsId = async (params:getIdParams) => {
-
-  // const res = await fetch(base_url + endpoint, {...options, credentials: 'include'})
   const res = await fetch(`${base_url}/dogs/search?` + new URLSearchParams(params), {...options, credentials: 'include'})
   if (res.ok) {
-    console.log('res:', res)
+
     return res.json()
   }
   return res.status

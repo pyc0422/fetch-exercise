@@ -54,7 +54,6 @@ export default function Search() {
   }
   useEffect(() => {
     const params = checkFilter();
-    console.log('params:', params)
     dogsList({...params})
 // eslint-disable-next-line react-hooks/exhaustive-deps
 }, [filter])
