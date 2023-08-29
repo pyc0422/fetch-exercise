@@ -1,3 +1,5 @@
+import { getIdParams } from "./pototype"
+
 const base_url = "https://frontend-take-home-service.fetch.com"
 
 const options = {headers:{'Content-Type': 'application/json', "Access-Control-Allow-Origin" : "*"}}
@@ -36,16 +38,21 @@ const getBreeds = async () => {
   }
 }
 
-type getIdParams = {
-  breeds?:string;
-  zipCodes?:string;
-  ageMin:number;
-  ageMax:number;
-  size?:number;
-  from?:number;
-  sort?:string;
+const getMatch = async (IDs:Array<string>) => {
+  try{
+    console.log(IDs)
+    const res = await fetch(`${base_url}/dogs/match`, {...options, credentials: 'include', method:'post', body: JSON.stringify(IDs)})
+    if (res && res.ok) {
+      return res.json()
+    } else {
+      return res.status
+    }
+  }catch(error) {
+    return 'get match error:'+error
+  }
 }
-const getDogsId = async (params:Record<string,string>) => {
+
+const getDogsId = async (params:getIdParams) => {
 
   // const res = await fetch(base_url + endpoint, {...options, credentials: 'include'})
   const res = await fetch(`${base_url}/dogs/search?` + new URLSearchParams(params), {...options, credentials: 'include'})
@@ -62,4 +69,4 @@ const getDogs = async(dogsList:Array<string>) => {
   }
   return res.status
 }
-export {getAuth, logOut, getBreeds, getDogsId, getDogs}
+export {getAuth, logOut, getBreeds, getDogsId, getDogs, getMatch}

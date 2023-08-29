@@ -1,15 +1,17 @@
 import { ChangeEvent } from "react";
+import { useAppContext } from "./AppContext";
 
-export default function AgeRange ({age, setAge}:{age:Record<string,number>, setAge:(age:Record<string,number>)=>void}) {
+export default function AgeRange () {
+  const { filter, setFilter } = useAppContext()
   const handleCount = (e:React.MouseEvent<HTMLButtonElement>, kind:string) => {
     e.preventDefault();
     const target = e.target as HTMLElement;
     let btn = target.innerText;
-    let temp = age[kind]
+    let temp= Number(filter[kind])
     if (btn === '-') {
-      setAge({...age, [kind]: temp > 0 ? temp-1 : 0})
+      setFilter({...filter, [kind]: temp > 0 ? (temp-1).toString() : "0"})
     } else if (btn === '+'){
-      setAge({...age, [kind]: temp + 1})
+      setFilter({...filter, [kind]: (temp + 1).toString()})
     }
   }
   return (
@@ -26,7 +28,7 @@ export default function AgeRange ({age, setAge}:{age:Record<string,number>, setA
             <span className="text-2xl font-thin hover:font-medium">-</span>
           </button>
           <div className="flex items-center justify-center">
-            <span id="min" className="text-gray-700 text-sm" >{age.min}</span>
+            <span id="min" className="text-gray-700 text-sm" >{filter.min}</span>
           </div>
           <button
             onClick={(e) => handleCount(e, 'min')}
@@ -48,7 +50,7 @@ export default function AgeRange ({age, setAge}:{age:Record<string,number>, setA
             <span className="m-auto text-2xl font-thin hover:font-medium">-</span>
           </button>
           <div className="flex items-center justify-center">
-            <span id="max" className="text-gray-700 text-sm" >{age.max}</span>
+            <span id="max" className="text-gray-700 text-sm" >{filter.max}</span>
           </div>
           <button
             onClick={(e) => handleCount(e, 'max')}

@@ -1,9 +1,10 @@
 "use client"
-import Input from '@/Components/Utilities/Input';
+import Input from '@/Components/Input';
 import {useForm, SubmitHandler} from 'react-hook-form';
 import { getAuth } from '@/utils/server';
 import { useRouter } from 'next/navigation';
 import { useAppContext } from './AppContext';
+import Swal from 'sweetalert2';
 type LoginValues = {
   name: string;
   email: string;
@@ -13,15 +14,20 @@ export default function LogIn() {
   const { user, setUser} = useAppContext()
   const {register, handleSubmit, formState: {errors}} = useForm({defaultValues: {name:"", email:""}})
   const onSubmit: SubmitHandler<LoginValues> = (data) => {
+    const regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+    const temp = regexp.test(data.email)
+    if (!regexp.test(data.email)) {
+      Swal.fire({icon:'error', title:'Oops...', text:'Invalid Email Address '})
+      return
+    }
     if (user.login === false) {
       return getAuth(data)
       .then((res) => {
        if(res === 200) {
-        setUser({name:data.name, email:data.email, login: true})
+        setUser({...user,name:data.name, email:data.email, login: true})
        }
       })
     }
-
   }
   return (
 

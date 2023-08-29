@@ -1,15 +1,19 @@
-export default function Sort ({sort, setSort}: {sort:Record<string, string>, setSort:(sort:Record<string, string>) => void}) {
+import { useAppContext } from "./AppContext"
+
+export default function Sort () {
+  const {filter, setFilter} = useAppContext()
   const handleSorted = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const sorted = e.target.value
-    if (sorted === 'ascending') {
-      setSort({...sort, method:"asc"})
-    } else if (sorted === 'desceding') {
-      setSort({...sort, method:"desc"})
-    }
+    // const sorted = e.target.value
+    setFilter({...filter, method:e.target.value})
+    // if (sorted === 'ascending') {
+    //   setSort({...sort, method:"asc"})
+    // } else if (sorted === 'desceding') {
+    //   setSort({...sort, method:"desc"})
+    // }
   }
 
   const sortedFeild = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSort({...sort, feild: e.target.value.toLowerCase()})
+    setFilter({...filter, feild: e.target.value})
   }
   return (
     <div>
@@ -17,21 +21,21 @@ export default function Sort ({sort, setSort}: {sort:Record<string, string>, set
         <select
           className="m-2 pl-2 text-gray-500 border rounded-md shadow-sm outline-none focus:border-secondary"
           onChange={sortedFeild}
-          defaultValue={"Breed"}
-          value={sort.feild}
+          defaultValue={"breed"}
+
         >
-          {["Breed", "Age", "Name", "Zip_Code"].map((feild, i) =>
-           <option key={i} value={feild}>{feild.replace("_", " ")}</option>
+          {["breed", "age", "name", "zip_code"].map((feild, i) =>
+           <option className="capitalize" key={i} value={feild}>{feild.replace("_", " ")}</option>
            )}
         </select>
         <select
          className="m-2 pl-2 text-gray-500 border rounded-md shadow-sm outline-none focus:border-secondary"
          onChange={handleSorted}
-         defaultValue={"ascending"}
-         value={sort.method === 'asc' ? "asceding" : "desceding"}
+         defaultValue={"asc"}
+
          >
-          <option value="ascending">Ascending</option>
-          <option value="desceding">Desceding</option>
+          <option value="asc">Ascending</option>
+          <option value="desc">Desceding</option>
         </select>
     </div>
   )

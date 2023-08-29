@@ -1,10 +1,22 @@
 'use client';
+import { Dog } from '@/utils/pototype';
 import {createContext, useContext, useState} from 'react'
 
-type UserType = {name: string; email: string; login: boolean};
-type StateType = {user: UserType; setUser(user: UserType): void};
-
-const AppContext = createContext<StateType>({user:{name:"", email:"", login:false}, setUser: () => {}});
+type UserType = {name: string; email: string; login: boolean, dogs:Array<Dog>, saved:Array<Dog>};
+type FilterType =Record<string, string>
+type StateType = {
+  user: UserType;
+  setUser(user: UserType): void;
+  filter: FilterType;
+  setFilter(filter:FilterType):void;
+};
+const initialState = {
+  user:{name:"", email:"", login:false, dogs:[], saved:[]},
+  setUser: () => {},
+  filter:{breed:"", min:"0", max:"0", size:"", feild:"Breed", method:"asc"},
+  setFilter:() => {}
+}
+const AppContext = createContext<StateType>(initialState);
 
 const useApp = () : StateType=> {
   const context = useContext(AppContext);
@@ -16,9 +28,10 @@ const useApp = () : StateType=> {
 export function AppWrapper({children}: {
   children: React.ReactNode
 }) {
-  const [user, setUser] = useState<UserType>({name:"", email:"", login: false})
+  const [user, setUser] = useState<UserType>(initialState.user)
+  const [filter, setFilter] = useState<FilterType>(initialState.filter)
   return (
-    <AppContext.Provider value = {{user, setUser}}>
+    <AppContext.Provider value = {{user, setUser, filter, setFilter}}>
       {children}
     </AppContext.Provider>
   )

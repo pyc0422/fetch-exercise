@@ -1,81 +1,84 @@
-import LogOut from "@/Components/Logout"
-import { getBreeds, getDogs, getDogsId } from "@/utils/server"
-import React, { ChangeEvent, ReactEventHandler, ReactHTMLElement, useEffect, useState} from "react";
-import Card from "./Utilities/Card";
-import { Dog } from "@/utils/pototype";
+import Header from "@/Components/Header"
+import {  getDogs, getDogsId, getMatch } from "@/utils/server"
+import React, { useEffect, useState} from "react";
+import Card from "./Card";
+import { Dog, getIdParams } from "@/utils/pototype";
 import ReactPaginate from "react-paginate";
 import Breed from "./Breed";
 import AgeRange from "./AgeRange";
 import Sort from "./Sort";
+import Swal from "sweetalert2";
+import { useAppContext } from "./AppContext";
+import Button from "./Button";
+import MatchDog from "./MatchDog";
+
 const page_style="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all hover:bg-neutral-100"
+const initalFilter = {breed:"none", min:"0", max:"0", size:"",feild:"Breed", method:"asc"}
 
 export default function Search() {
+  const {user, setUser, filter, setFilter} = useAppContext()
 
-  const [selectedBreed, setSelectedBreed] = useState<string>("none")
-  const [age, setAge] = useState<Record<string, number>>({min:0, max:0})
   const [dogs, setDogs] = useState<Array<Dog>>([]);
   const [fetchData, setFetchData] = useState({next:"", resultIds:[],"total":1})
   const [currentpage, setPage] = useState(0)
-  const [sort, setSort] = useState<Record<string, string>>({feild:"Breed", method:"asc"})
-
-  const dogsList = async (params: Record<string, string>) => {
+  // const [loading, setloading] = useState(false)
+  const dogsList = async (params: getIdParams) => {
     const res = await getDogsId(params);
-    if (res) {
+    // console.log('res:', res)
+    if (typeof res !== 'number') {
       setPage(currentpage + 1)
       setFetchData(res)
       const details = await getDogs(res.resultIds)
-      console.log('dd', details)
+      // console.log('dd', details)
+      if (details)
       setDogs(details)
+    } else {
+      // setloading(false)
+      Swal.fire({
+        icon:'error',
+        title:'Oops...',
+        text:'Something went wrong with our website..'
+      })
     }
   }
-
+  const checkFilter = () => {
+    const minAge = Number(filter.min) === 0 ? "" : filter.min;
+    const maxAge = (Number(filter.max) === 0 || Number(filter.max) < Number(filter.min)) ? "" : filter.max;
+    let params = {"breed":filter.breed.slice(1), "sort":filter.feild.toLowerCase()+':'+filter.method, "ageMin": minAge,"ageMax":maxAge}
+    return params;
+  }
   const pageClickHanlder = async (e: {selected:number}) => {
     const selectedPage = ((e.selected + 1) * 25).toString();
-    console.log('page[, ',e.selected, typeof e.selected)
-    dogsList({'size':'25', 'from':selectedPage, 'sort':sort.feild.toLowerCase()+':'+sort.method})
+    const params = checkFilter()
+    dogsList({...params, 'from':selectedPage})
   }
-
-  // const handleSorted = (e: ChangeEvent<HTMLSelectElement>) => {
-  //   const sorted = e.target.value
-  //   if (sorted === 'ascending') {
-  //     setSort({...sort, method:"asc"})
-  //   } else if (sorted === 'desceding') {
-  //     setSort({...sort, method:"desc"})
-  //   }
-  // }
-
-
-
   useEffect(() => {
-      console.log('sort in effect:', sort, age)
-
-      const minAge = age.min === 0 ? "" : age.min.toString();
-      const maxAge = (age.max === 0 || age.max < age.min) ? "" : age.max.toString();
-
-      let params = {"sort":sort.feild.toLowerCase()+':'+sort.method, "ageMin":minAge, "ageMax":maxAge}
-      console.log('age', minAge, maxAge)
-      if (selectedBreed !== "none") {
-        dogsList({...params, 'breeds':selectedBreed, })
-      } else {
-        dogsList(params)
-      }
-
-  }, [sort, selectedBreed, age])
+    const params = checkFilter();
+    console.log('params:', params)
+    dogsList({...params})
+// eslint-disable-next-line react-hooks/exhaustive-deps
+}, [filter])
 
   return (
 
     <div className="mb-4">
-      <LogOut />
-      <Breed selectedBreed={selectedBreed} setSelectedBreed={setSelectedBreed}/>
-      <div className="flex flex-row justify-evenly items-center">
-        <AgeRange age={age} setAge={setAge} />
-        <Sort sort={sort} setSort={setSort} />
+      <Header Ids={fetchData.resultIds} dogs={dogs}/>
+      <div className="flex flex-row justify-around items-center">
+        <Breed />
+        <Button text="clear filter" class="h-6" onClick={()=>setFilter(initalFilter)}/>
       </div>
+
+      <div className="flex flex-row justify-evenly items-center">
+        <AgeRange />
+        <Sort />
+      </div>
+      <MatchDog Ids={fetchData.resultIds} dogs={dogs} text="Random Match a dog for me"/>
 
       <div className="mt-6 flex flex-wrap justify-center">
         {dogs.map((dog, i) => <Card key={i} dog={dog} />
         )}
       </div>
+
 
       <ReactPaginate
         className="flex flex-row text-sm font-medium justify-evenly mt-4 mb-8"
