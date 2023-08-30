@@ -1,34 +1,54 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+#Fetch Take-Home Project - Dog Lover
 
-## Getting Started
+This repository contains my solution to the FE project. 
 
-First, run the development server:
+Welcome to try my deployed live version -> [https://fetch-dog-lover.vercel.app/](https://fetch-dog-lover.vercel.app/)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## Project Review
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Fetch required us to building a web application that allows users to explore avaliable dogs from their database and create matches based on the users preferences. The application consists of 2 main sections: the Login Screen and the Search Page.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Features
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Login Screen
 
-## Learn More
+  - Users can enter their name and valid email on the login screen
+  - If name or email is missing, will display error message to the users
+  - If users enter an invalid email will pop up an error alert to notify the users
 
-To learn more about Next.js, take a look at the following resources:
+### Search Page
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+  - Users can filter dogs by breed (Based on the API error, it's not working yet)
+  - Users can filter dogs by setup preferent age range
+  - Results are paginated for easy navigation
+  - Results are sorted alphabetically by breed by default, users can set up their own preferences sort dogs by different field and method
+  - All fields of the Dog are displayed
+  - Users can click any Dog Card to save the dog to their save list or to adapt the dog
+  - Users can match a random dog from the database and choose to adopt it or not
+  - Users can math a dog from their saved dog list to adopt or not
+  - Users can click any dog in the saved list to review their information and choose to unsave or adopt
+  - User can logout by clicking the logout button
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Technologies Used
+<a href="https://www.typescriptlang.org/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/typescript-colored.svg" width="36" height="36" alt="TypeScript" /></a>
+  <a href="https://reactjs.org/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/react-colored.svg" width="36" height="36" alt="React" /></a>
+  <a href="https://nextjs.org/docs" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/nextjs-colored-dark.svg" width="36" height="36" alt="NextJs" /></a>
+  <a href="https://tailwindcss.com/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/tailwindcss-colored.svg" width="36" height="36" alt="TailwindCSS" /></a>
+<a href="https://developer.mozilla.org/en-US/docs/Glossary/HTML5" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/html5-colored.svg" width="36" height="36" alt="HTML5" /></a>
+<a href="https://nodejs.org/en/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/nodejs-colored.svg" width="36" height="36" alt="NodeJS" /></a>
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+  TypeScript, Next.js, React.js, TailwindCSS, Node.js, Fetch, Sweetalert, Jest, React Testing Library 
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Setup and Running
+
+  1. Clone this repository: `git clone https://github.com/pyc0422/fetch-exercise.git`
+  2. Navigate to the project directory: `cd fetch-exersice`
+  3. Open terminal run below commends
+
+    ```
+    npm install
+    npm run dev
+    ```
+ 5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
