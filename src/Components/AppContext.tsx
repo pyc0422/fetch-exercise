@@ -16,7 +16,7 @@ const initialState = {
   filter:{breed:"", min:"0", max:"0", size:"", feild:"Breed", method:"asc"},
   setFilter:() => {}
 }
-const AppContext = createContext<StateType>(initialState);
+export const AppContext = createContext<StateType>(initialState);
 
 const useApp = () : StateType=> {
   const context = useContext(AppContext);

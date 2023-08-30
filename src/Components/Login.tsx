@@ -2,7 +2,6 @@
 import Input from '@/Components/Input';
 import {useForm, SubmitHandler} from 'react-hook-form';
 import { getAuth } from '@/utils/server';
-import { useRouter } from 'next/navigation';
 import { useAppContext } from './AppContext';
 import Swal from 'sweetalert2';
 type LoginValues = {
@@ -10,12 +9,11 @@ type LoginValues = {
   email: string;
 }
 export default function LogIn() {
-  const router = useRouter();
+
   const { user, setUser} = useAppContext()
   const {register, handleSubmit, formState: {errors}} = useForm({defaultValues: {name:"", email:""}})
   const onSubmit: SubmitHandler<LoginValues> = (data) => {
     const regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-    const temp = regexp.test(data.email)
     if (!regexp.test(data.email)) {
       Swal.fire({icon:'error', title:'Oops...', text:'Invalid Email Address '})
       return
@@ -40,6 +38,7 @@ export default function LogIn() {
             label="Name"
             required={true}
             id="name"
+            aria-label="name_input"
             placeholder='Type your name...'
             register={register}
             erro={errors.name}
@@ -47,6 +46,7 @@ export default function LogIn() {
           <Input
             label="Email"
             required={true}
+            aria-label="email_input"
             id="email"
             placeholder="Type your email..."
             register={register}
@@ -54,6 +54,7 @@ export default function LogIn() {
           />
           <div className="text-center">
             <input
+              aria-label="login_submit"
               className="hover:opacity-80 active:opacity-100 shadow-sx border rounded-md px-4 py-1 text-m my-2 focus:outline-none focus:ring-2"
               type="submit"
               value="Submit"

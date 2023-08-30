@@ -31,7 +31,7 @@ export default function Breed () {
       </select>
     </div>
     <div className="flex flex-row mt-2">
-      {filter.breed.length>0 && filter.breed.split(",").slice(1).map((bre, i) =>
+      {filter.breed==="" ? null : filter.breed.split(",").slice(1).map((bre, i) =>
       <div key={i} className="mx-1 text-xs px-1 border border-1 w-fit">
         <span
           className="text-sm mr-2 px-1 hover:text-secondary hover:font-medium"

@@ -13,11 +13,10 @@ import Button from "./Button";
 import MatchDog from "./MatchDog";
 
 const page_style="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all hover:bg-neutral-100"
-const initalFilter = {breed:"none", min:"0", max:"0", size:"",feild:"Breed", method:"asc"}
+const initialFilter = {breed:"", min:"0", max:"0", size:"",feild:"Breed", method:"asc"}
 
 export default function Search() {
-  const {user, setUser, filter, setFilter} = useAppContext()
-
+  const {filter, setFilter} = useAppContext()
   const [dogs, setDogs] = useState<Array<Dog>>([]);
   const [fetchData, setFetchData] = useState({next:"", resultIds:[],"total":1})
   const [currentpage, setPage] = useState(0)
@@ -64,7 +63,7 @@ export default function Search() {
       <Header Ids={fetchData.resultIds} dogs={dogs}/>
       <div className="mt-4 flex flex-row flex-wrap justify-evenly items-center">
         <Breed />
-        <Button text="clear filter" class="h-6" onClick={()=>setFilter(initalFilter)}/>
+        <Button text="clear filter" class="h-6" onClick={()=>setFilter({breed:"", min:"0", max:"0", size:"",feild:"Breed", method:"asc"})}/>
       </div>
 
       <div className="flex flex-wrap flex-row justify-evenly items-center">
