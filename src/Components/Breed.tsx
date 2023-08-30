@@ -25,6 +25,7 @@ export default function Breed () {
       <select
       className="m-2 pl-2 text-gray-500 border rounded-md shadow-sm outline-none focus:border-secondary"
       onChange={breedChange}
+      value={filter.breed === ""?"none" : filter.breed.split(",").pop()}
       >
         <option value="none" disabled>Select a breed</option>
         {breeds.map((breed, i) =>(<option key={i} value={breed}>{breed}</option>))}
