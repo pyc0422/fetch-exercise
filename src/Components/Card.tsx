@@ -16,12 +16,33 @@ export default function Card ({dog}: {dog:Dog}) {
       denyButtonText:'Save',
       denyButtonColor:'#F9A826',
     }).then((result)=>{
+
       if (result.isConfirmed) {
-        setUser({...user, dogs:user.dogs.concat(dog)})
-        return 'adopted'
+        const dogSet = new Set(user.dogs)
+        if (dogSet.has(dog)) {
+          Swal.fire({
+            icon:"warning",
+            title:"Awww",
+            text:"You already adopted this dog!"
+          })
+        } else {
+          setUser({...user, dogs:user.dogs.concat(dog)})
+          return 'adopted'
+        }
+
+
       } else if (result.isDenied) {
-        setUser({...user, saved:user.saved.concat(dog)})
-        return 'saved'
+        const savedSet = new Set(user.saved)
+        if (savedSet.has(dog)) {
+          Swal.fire({
+            icon:'warning',
+            title:'So sweet',
+            text:'You already saved this dog'
+          })
+        } else {
+         setUser({...user, saved:user.saved.concat(dog)})
+         return 'saved'
+        }
       }
     })
     .then((res) => {
@@ -33,15 +54,16 @@ export default function Card ({dog}: {dog:Dog}) {
   }
   return (
     <div
-     className="h-72 w-56 m-2 border border-2 hover:ring-2 active:ring-secondary"
+
+     className="bg-[#E0F1FB] h-72 w-56 m-2 border border-2 hover:ring-2 active:ring-secondary rounded-lg"
      onClick={handleDogClick}
     >
-      <div className="flex item-center justify-center w-56 h-40 border-b-2 mb-2">
+      <div className="flex item-center justify-center w-56 h-40 mb-2 border-b-2">
        <Image alt={dog.name +'image'} src={dog.img} width={50} height={50} style={{width:"100%", height:"auto", objectFit:"contain"}} />
       </div>
-      <div className="px-2">
-        <div><strong>Age: </strong>{dog.age}</div>
+      <div className="px-2 mt-4">
         <div><strong>Name:</strong> {dog.name}</div>
+        <div><strong>Age: </strong>{dog.age}</div>
         <div><strong>Breed: </strong>{dog.breed}</div>
         <div><strong>Zip Code:</strong> {dog.zip_code}</div>
       </div>

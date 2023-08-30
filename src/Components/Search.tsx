@@ -60,14 +60,14 @@ export default function Search() {
 
   return (
 
-    <div className="mb-4">
+    <div className="mb-4 w-full">
       <Header Ids={fetchData.resultIds} dogs={dogs}/>
-      <div className="flex flex-row justify-around items-center">
+      <div className="mt-4 flex flex-row flex-wrap justify-evenly items-center">
         <Breed />
         <Button text="clear filter" class="h-6" onClick={()=>setFilter(initalFilter)}/>
       </div>
 
-      <div className="flex flex-row justify-evenly items-center">
+      <div className="flex flex-wrap flex-row justify-evenly items-center">
         <AgeRange />
         <Sort />
       </div>
@@ -78,9 +78,11 @@ export default function Search() {
         )}
       </div>
 
+     <div className="flex justify-center items-center">
+
 
       <ReactPaginate
-        className="flex flex-row text-sm font-medium justify-evenly mt-4 mb-8"
+        className="flex w-1/2 min-w-fit flex-row text-sm font-medium justify-evenly mt-4 mb-8"
         previousClassName={page_style}
         nextClassName={page_style}
         pageLinkClassName={page_style}
@@ -95,7 +97,7 @@ export default function Search() {
         selectedPageRel={"clicked"}
         onPageChange={pageClickHanlder}
       />
-
+    </div>
 
     </div>
 

@@ -18,10 +18,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-      <main className="flex min-h-screen flex-col items-center p-24">
+      <main className="flex w-screen min-h-screen flex-col items-center p-10 lg:p-24 sm:p-20">
         <strong className="text-xl text-primary">Welcome to <span className="text-3xl text-secondary">Dog Lover</span> !</strong>
         <AppWrapper>{children}</AppWrapper>
-
       </main>
       </body>
     </html>

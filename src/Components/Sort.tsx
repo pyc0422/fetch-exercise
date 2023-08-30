@@ -16,7 +16,7 @@ export default function Sort () {
     setFilter({...filter, feild: e.target.value})
   }
   return (
-    <div>
+    <div className="flex flex-row flex-wrap items-center">
         <span className="text-sm text-gray-500 mr-2">Sorted by:</span>
         <select
           className="m-2 pl-2 text-gray-500 border rounded-md shadow-sm outline-none focus:border-secondary"

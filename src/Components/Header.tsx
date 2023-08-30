@@ -8,7 +8,7 @@ import { useState } from "react"
 import MatchDog from "./MatchDog"
 export default function Header ({Ids, dogs}:{Ids:string[], dogs:Array<Dog>}) {
   const {user, setUser} = useAppContext()
-  const [dispalySaved, toggleSaved] = useState(false)
+  const [displaySaved, toggleSaved] = useState(false)
   const handleDogClick = (dog:Dog) => {
     Swal.fire({
       imageUrl:dog.img,
@@ -56,19 +56,18 @@ export default function Header ({Ids, dogs}:{Ids:string[], dogs:Array<Dog>}) {
   }
 
   const toggleSavedList = () => {
-    toggleSaved(!dispalySaved)
+    toggleSaved(!displaySaved)
   }
   return (
-    <div className="mt-4 mb-8 flex flex-col">
+    <div className="m-8 flex flex-col">
       <div className="flex justify-evenly">
         <div>Hi, {user.name.toUpperCase()}</div>
         <Button text="Saved" onClick={toggleSavedList} />
         <Button text="your dogs" onClick={toggleDogList}/>
-
         <Button text="log out" onClick={handleLogOut} />
       </div>
       <div>
-      {dispalySaved ?
+      {displaySaved ?
       <div className="mx-6 w-3/4 text-sm flex justify-center items-center">
         <div className="m-4 p-2 flex flex-col items-center border borede-1 w-max min-h-fit h-100">
           <div className="text-right" onClick={() => toggleSaved(false)}>

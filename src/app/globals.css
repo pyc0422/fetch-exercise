@@ -7,12 +7,12 @@
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: #F3F3F3;
-  --background-end-rgb: #EAEAEA;
+  --background-end-rgb: #F0E1CD;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    --foreground-rgb: #EAEAEA;
+    --foreground-rgb: #F0E1CD;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
   }

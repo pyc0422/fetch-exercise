@@ -18,7 +18,7 @@ export default function Breed () {
   }, [])
 
   return (
-    <div className="my-4 flex flex-col">
+    <div className="w-fit my-4 flex flex-col">
     <div className="flex justify-center items-center">
       <label htmlFor="breed" className="block text-sm text-gray-500">Breed:</label>
 
