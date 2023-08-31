@@ -1,7 +1,7 @@
 'use client'
 import { logOut } from "@/utils/server"
 import { useAppContext } from "./AppContext"
-import Button from "./Button"
+import Button from "./Elements/Button"
 import Swal from "sweetalert2"
 import { Dog } from "@/utils/pototype"
 import { useState } from "react"

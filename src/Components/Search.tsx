@@ -9,7 +9,7 @@ import AgeRange from "./AgeRange";
 import Sort from "./Sort";
 import Swal from "sweetalert2";
 import { useAppContext } from "./AppContext";
-import Button from "./Button";
+import Button from "./Elements/Button";
 import MatchDog from "./MatchDog";
 
 const page_style="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all hover:bg-neutral-100"
