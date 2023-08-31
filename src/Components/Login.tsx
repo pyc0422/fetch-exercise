@@ -1,9 +1,10 @@
 "use client"
-import Input from '@/Components/Input';
+import Input from './Elements/Input';
 import {useForm, SubmitHandler} from 'react-hook-form';
 import { getAuth } from '@/utils/server';
 import { useAppContext } from './AppContext';
 import Swal from 'sweetalert2';
+
 type LoginValues = {
   name: string;
   email: string;
@@ -22,6 +23,7 @@ export default function LogIn() {
       return getAuth(data)
       .then((res) => {
        if(res === 200) {
+
         setUser({...user,name:data.name, email:data.email, login: true})
        }
       })
@@ -29,7 +31,7 @@ export default function LogIn() {
   }
   return (
 
-      <div className="max-w-300">
+      <div className="mt-8 max-w-300">
         <form className="px-2 pt-4" onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
             <strong className="text-xl">Log In</strong>
