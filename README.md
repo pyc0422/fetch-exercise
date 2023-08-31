@@ -1,8 +1,10 @@
-#Fetch Take-Home Project - Dog Lover
+# Fetch Take-Home Project - Dog Lover
 
 This repository contains my solution to the FE project. 
 
 Welcome to try my deployed live version -> [https://fetch-dog-lover.vercel.app/](https://fetch-dog-lover.vercel.app/)
+
+Iphone still have 401 error after login. I'm still fixing it yet.
 
 ## Project Review
 
