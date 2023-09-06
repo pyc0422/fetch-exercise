@@ -10,7 +10,7 @@ export default function Breed () {
     setBreeds(res)
   }
   const breedChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setFilter({...filter, breed: filter.breed += ","+e.target.value})
+    setFilter({...filter, breeds: e.target.value})
   }
 
   useEffect(() => {
@@ -25,25 +25,25 @@ export default function Breed () {
       <select
       className="m-2 pl-2 text-gray-500 border rounded-md shadow-sm outline-none focus:border-secondary"
       onChange={breedChange}
-      value={filter.breed === ""?"none" : filter.breed.split(",").pop()}
+      defaultValue={"none"}
       >
         <option value="none" disabled>Select a breed</option>
         {breeds.map((breed, i) =>(<option key={i} value={breed}>{breed}</option>))}
       </select>
     </div>
-    <div className="flex flex-row mt-2">
-      {filter.breed==="" ? null : filter.breed.split(",").slice(1).map((bre, i) =>
+    {/* <div className="flex flex-row mt-2">
+      {filter['breeds[]']==="" ? null : filter['breeds[]'].split(",").slice(1).map((bre, i) =>
       <div key={i} className="mx-1 text-xs px-1 border border-1 w-fit">
         <span
           className="text-sm mr-2 px-1 hover:text-secondary hover:font-medium"
-          onClick={() => setFilter({...filter, breed:filter.breed.replace(`,${bre}`,"")})}
+          onClick={() => setFilter({...filter, 'breeds[]':filter['breeds[]'].replace(`,${bre}`,"")})}
         >
           X
         </span>
         {bre}
       </div>
       )}
-    </div>
+    </div> */}
   </div>
   )
 }

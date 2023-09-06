@@ -13,7 +13,7 @@ type StateType = {
 const initialState = {
   user:{name:"", email:"", login:false, dogs:[], saved:[]},
   setUser: () => {},
-  filter:{breed:"", min:"0", max:"0", size:"", feild:"Breed", method:"asc"},
+  filter:{breeds:"", min:"0", max:"0", size:"", feild:"Breed", method:"asc"},
   setFilter:() => {}
 }
 export const AppContext = createContext<StateType>(initialState);

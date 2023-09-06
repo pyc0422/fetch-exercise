@@ -43,8 +43,11 @@ export default function Search() {
   const checkFilter = () => {
     const minAge = Number(filter.min) === 0 ? "" : filter.min;
     const maxAge = (Number(filter.max) === 0 || Number(filter.max) < Number(filter.min)) ? "" : filter.max;
-    let params = {"breed":filter.breed.slice(1), "sort":filter.feild.toLowerCase()+':'+filter.method, "ageMin": minAge,"ageMax":maxAge}
-    return params;
+    let params = {"sort":filter.feild.toLowerCase()+':'+filter.method, "ageMin": minAge,"ageMax":maxAge}
+    if (filter.breeds === 'none'){
+      return params;
+    }
+    return {...params, "breeds":filter.breeds};
   }
   const pageClickHanlder = async (e: {selected:number}) => {
     const selectedPage = ((e.selected + 1) * 25).toString();
@@ -53,6 +56,7 @@ export default function Search() {
   }
   useEffect(() => {
     const params = checkFilter();
+    console.log('oara', params)
     dogsList({...params})
 // eslint-disable-next-line react-hooks/exhaustive-deps
 }, [filter])
@@ -63,7 +67,7 @@ export default function Search() {
       <Header Ids={fetchData.resultIds} dogs={dogs}/>
       <div className="mt-4 flex flex-row flex-wrap justify-evenly items-center">
         <Breed />
-        <Button text="clear filter" class="h-6" onClick={()=>setFilter({breed:"", min:"0", max:"0", size:"",feild:"Breed", method:"asc"})}/>
+        <Button text="clear filter" class="h-6" onClick={()=>setFilter({breeds:"", min:"0", max:"0", size:"",feild:"Breed", method:"asc"})}/>
       </div>
 
       <div className="flex flex-wrap flex-row justify-evenly items-center">
