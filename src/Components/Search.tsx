@@ -44,7 +44,7 @@ export default function Search() {
     const minAge = Number(filter.min) === 0 ? "" : filter.min;
     const maxAge = (Number(filter.max) === 0 || Number(filter.max) < Number(filter.min)) ? "" : filter.max;
     let params = {"sort":filter.feild.toLowerCase()+':'+filter.method, "ageMin": minAge,"ageMax":maxAge}
-    if (filter.breeds === 'none'){
+    if (filter.breeds === 'none' || filter.breeds===""){
       return params;
     }
     return {...params, "breeds":filter.breeds};
