@@ -1,6 +1,6 @@
 "use client"
-import HomePage from "@/Components/HomePage";
-import Search from "@/Components/Search";
+import HomePage from "@/app/HomePage";
+import Search from "@/app/Search";
 import { useAppContext } from "@/Components/AppContext";
 export default function Home() {
   const { user } = useAppContext()

@@ -2,7 +2,7 @@ import { getMatch } from "@/utils/server"
 import Swal from "sweetalert2"
 import { Dog } from "@/utils/pototype"
 import { useAppContext } from "./AppContext"
-import Button from "./Elements/Button"
+
 export default function MatchDog () {
   const {user, setUser} = useAppContext()
   const handleMatchDog = async () => {
@@ -51,12 +51,14 @@ export default function MatchDog () {
     }
   }
   return (
-
-      <Button
+    <div className="btn">
+      <button
         onClick={handleMatchDog}
-        text="match me a dog"
-      />
-
+        className="btn h-10 w-64 font-medium bg-rose-400 text-white/80 btn_hover "
+      >
+       match me a dog
+      </button>
+    </div>
 
   )
 }

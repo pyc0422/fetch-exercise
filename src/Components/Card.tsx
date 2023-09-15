@@ -59,21 +59,21 @@ export default function Card ({dog, heart, click}: {dog:Dog, heart?:boolean, cli
   }
   return (
     <div
-     className="bg-[#E0F1FB] h-72 w-56 m-2 border border-2 hover:ring-2 active:ring-secondary rounded-lg"
+     className="bg-black/10  h-72 w-56 m-2 border hover:ring-2 active:ring-secondary rounded-lg shadow-md"
     >
       <div onClick={handleDogClick} className="flex item-center justify-center w-56 h-40 mb-2 border-b-2">
-       <Image alt={dog.name +'image'} src={dog.img} width={50} height={50} style={{width:"100%", height:"auto", objectFit:"contain"}} />
+       <Image alt={dog.name +'image'} src={dog.img} width={50} height={50} style={{width:"100%", height:"auto", objectFit:"contain"}} className="border rounded"/>
       </div>
-      <div className="relative px-2 mt-4">
+      <ul className="relative px-2 mt-4">
       {heart === false ? null : <FaHeart
       className={isLike ? 'text-rose-500 '+ heart_style:'text-white '+heart_style}
       onClick={toggleSaved}
       />}
-        <div><strong>Name:</strong> {dog.name}</div>
-        <div><strong>Age: </strong>{dog.age}</div>
-        <div><strong>Breed: </strong>{dog.breed}</div>
-        <div><strong>Zip Code:</strong> {dog.zip_code}</div>
-      </div>
+        <li><strong>Name:</strong> {dog.name}</li>
+        <li><strong>Age: </strong>{dog.age}</li>
+        <li><strong>Breed: </strong>{dog.breed}</li>
+        <li><strong>Zip Code:</strong> {dog.zip_code}</li>
+      </ul>
 
     </div>
   )

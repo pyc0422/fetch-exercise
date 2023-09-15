@@ -4,9 +4,9 @@ import React, { useEffect, useState} from "react";
 import { Dog, getIdParams } from "@/utils/pototype";
 import ReactPaginate from "react-paginate";
 import Swal from "sweetalert2";
-import { useAppContext } from "./AppContext";
-import Filter from "./Filter";
-import ListPage from "./Elements/ListPage";
+import { useAppContext } from "../Components/AppContext";
+import Filter from "../Components/Filter";
+import ListPage from "../Components/Elements/ListPage";
 
 const page_style="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all hover:bg-rose-300"
 const initialFilter = {breed:"", min:"0", max:"0", size:"",feild:"Breed", method:"asc"}
@@ -58,17 +58,17 @@ export default function Search() {
 }, [filter])
 
   return (
-    <>
+    <div className="relative flex flex-col">
     <Header Ids={fetchData.resultIds} dogs={dogs}/>
-    <div className="mt-24 w-full">
+    <div className="mt-24 h-3/4 w-full">
       { activeTab === 'tab-saved' ? <ListPage type="saved" />
       : activeTab === "tab-adopt" ? <ListPage type="adopted" />
       :
       <>
         <Filter dogs={dogs} />
 
-        <div className="flex justify-center items-center">
-          <div className="fixed bottom-0 bg-[#fdccce] w-screen flex flex-row justify-center">
+        <div className="relative bottom-0  flex justify-center items-center">
+          <div className="bg-[#fdccce] w-screen flex flex-row justify-center">
            <ReactPaginate
             className="w-1/2 min-w-fit flex flex-row text-sm font-medium justify-evenly mt-4 mb-8"
             previousClassName={page_style}
@@ -92,6 +92,6 @@ export default function Search() {
       }
 
     </div>
-  </>
+  </div>
   )
 }

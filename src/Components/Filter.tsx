@@ -1,5 +1,4 @@
 import Breed from "./Breed"
-import Button from "./Elements/Button"
 import AgeRange from "./AgeRange"
 import Sort from "./Sort"
 import Card from "./Card"
@@ -11,7 +10,10 @@ export default function Filter ({dogs}:{dogs:Dog[]}) {
     <>
       <div className="mt-4 flex flex-row flex-wrap justify-evenly items-center">
         <Breed />
-        <Button text="clear filter" class="h-6" onClick={()=>setFilter({breeds:"", min:"0", max:"0", size:"",feild:"Breed", method:"asc"})}/>
+        <button
+         className="btn h-8 border-2 border-rose-400 text-rose-400 font-medium flex items-center btn_hover shadow-md"
+         onClick={()=>setFilter({breeds:"", min:"0", max:"0", size:"",feild:"Breed", method:"asc"})}
+        >{"> clear filter <"}</button>
       </div>
       <div className="flex flex-wrap flex-row justify-evenly items-center">
         <AgeRange />

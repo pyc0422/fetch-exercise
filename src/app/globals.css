@@ -43,3 +43,23 @@ body {
     #fdccce 0.845turn
   );
 }
+@layer utilities {
+  .menu_btn {
+    @apply capitalize my-1 text-sm block text-black text-left hover:bg-rose-400/20
+  }
+  .menu_active {
+    @apply bg-rose-400/50
+  }
+  .btn {
+    @apply capitalize text-base py-1  px-4 rounded
+  }
+  .btn_hover {
+    @apply hover:opacity-80 active:opacity-100
+  }
+  .nav_hover {
+    @apply hover:opacity-80 hover:-translate-y-2 hover:scale-110 duration-200
+  }
+  .active_tab {
+    @apply border-rose-400 transition ease-in-out delay-75
+  }
+}
