@@ -2,12 +2,19 @@ import { getMatch } from "@/utils/server"
 import Swal from "sweetalert2"
 import { Dog } from "@/utils/pototype"
 import { useAppContext } from "./AppContext"
-export default function MatchDog ({Ids, dogs, text}:{Ids?:string[], dogs:Array<Dog>, text:string}) {
+
+export default function MatchDog () {
   const {user, setUser} = useAppContext()
   const handleMatchDog = async () => {
-    if (!Ids) {
-      Ids = dogs.map(dog => dog.id)
+    if (!user.saved.length){
+      Swal.fire({
+        icon:'warning',
+        title: 'Opps...',
+        text: 'Choose some dog you like first, then we can match one for you'
+      })
+      return;
     }
+    const Ids = user.dogs.map(dog => dog.id)
     const res = await getMatch(Ids)
     if (typeof res === 'number') {
       Swal.fire({
@@ -17,7 +24,7 @@ export default function MatchDog ({Ids, dogs, text}:{Ids?:string[], dogs:Array<D
         confirmButtonText: 'Reset the search condition'
       })
     } else {
-      const matched:Dog | undefined = dogs.find(dog => dog.id === res.match)
+      const matched:Dog | undefined = user.dogs.find(dog => dog.id === res.match)
       if (matched) {
         const detailHtml =
         `<div className="px-2">
@@ -44,12 +51,13 @@ export default function MatchDog ({Ids, dogs, text}:{Ids?:string[], dogs:Array<D
     }
   }
   return (
-    <div className="text-center mt-4 ">
+    <div className="btn">
       <button
-      className="text-m font-bold border border-gray-400 rounded-lg shadow-sm px-4 py-1 text-secondary hover:ring-1 hover:ring-accent hover:bg-neutral-100 active:ring-secondary active:bg-white"
-      onClick={handleMatchDog}
+        onClick={handleMatchDog}
+        className="btn h-10 w-64 font-medium bg-rose-400 text-white/80 btn_hover "
       >
-        {text}</button>
+       match me a dog
+      </button>
     </div>
 
   )

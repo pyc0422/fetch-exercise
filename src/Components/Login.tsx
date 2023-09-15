@@ -4,7 +4,7 @@ import {useForm, SubmitHandler} from 'react-hook-form';
 import { getAuth } from '@/utils/server';
 import { useAppContext } from './AppContext';
 import Swal from 'sweetalert2';
-
+import {FaArrowDown} from "react-icons/fa"
 type LoginValues = {
   name: string;
   email: string;
@@ -23,18 +23,18 @@ export default function LogIn() {
       return getAuth(data)
       .then((res) => {
        if(res === 200) {
-
         setUser({...user,name:data.name, email:data.email, login: true})
        }
       })
     }
   }
   return (
-
-      <div className="mt-8 max-w-300">
         <form className="px-2 pt-4" onSubmit={handleSubmit(onSubmit)}>
-          <div className="mb-4">
-            <strong className="text-xl">Log In</strong>
+          <div className="mt-4 animate-bounce flex flex-col items-center justify-baseline drop-shadow-[0_1.5px_1.5px_rgba(255,255,255)]">
+            <p className="w-1/2 p-1 text-center text-rose-300 text-sm border-2 border-rose-300 rounded-md shawdow-md">
+               Starts Here
+            </p>
+            <FaArrowDown style={{color:'rgb(252 165 165)', marginTop:"2px"}}/>
           </div>
           <Input
             label="Name"
@@ -57,13 +57,13 @@ export default function LogIn() {
           <div className="text-center">
             <input
               aria-label="login_submit"
-              className="hover:opacity-80 active:opacity-100 shadow-sx border rounded-md px-4 py-1 text-m my-2 focus:outline-none focus:ring-2"
+              className="font-extralight text-slate-50 w-full bg-rose-400 hover:opacity-80 active:opacity-100 shadow-sx border rounded-md px-4 py-1 text-m my-2 focus:outline-none focus:ring-2"
               type="submit"
-              value="Submit"
+              value="Start"
             />
           </div>
 
         </form>
-      </div>
+
   )
 }

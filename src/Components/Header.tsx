@@ -1,40 +1,16 @@
 'use client'
 import { logOut } from "@/utils/server"
 import { useAppContext } from "./AppContext"
-import Button from "./Elements/Button"
-import Swal from "sweetalert2"
+import Image from "next/image"
 import { Dog } from "@/utils/pototype"
+import {GiHamburgerMenu} from "react-icons/gi"
 import { useState } from "react"
-import MatchDog from "./MatchDog"
-export default function Header ({Ids, dogs}:{Ids:string[], dogs:Array<Dog>}) {
-  const {user, setUser} = useAppContext()
-  const [displaySaved, toggleSaved] = useState(false)
-  const handleDogClick = (dog:Dog) => {
-    Swal.fire({
-      imageUrl:dog.img,
-      imageHeight:500,
-      html: `<div className="text-sm">${dog.name} is a ${dog.age} year old ${dog.breed} lives around ${dog.zip_code}</div>`,
-      imageAlt:dog.name+' image',
-      showCancelButton:true,
-      confirmButtonText:'Adopt',
-      showDenyButton:true,
-      denyButtonText:'Unsave',
-    }).then((result)=>{
-      if (result.isConfirmed) {
-        setUser({...user, dogs:user.dogs.concat(dog)})
-        return 'adopted'
-      } else if (result.isDenied) {
-        setUser({...user, saved:user.saved.filter(item => item.id !== dog.id)})
-        return 'moved'
-      }
-    })
-    .then((res) => {
-      if (res) {
-        Swal.fire(`${res.toUpperCase()}!`, "", "success")
-      }
 
-    })
-  }
+export default function Header ({Ids, dogs}:{Ids:string[], dogs:Array<Dog>}) {
+  const {user, setUser, activeTab, setTab} = useAppContext()
+  const [menu, toggleMenu] = useState(false)
+  // const [displaySaved, toggleSaved] = useState(false)
+
   const handleLogOut = () => {
     if (user) {
       return logOut({name: user.name, email: user.email})
@@ -43,50 +19,60 @@ export default function Header ({Ids, dogs}:{Ids:string[], dogs:Array<Dog>}) {
       })
     }
   }
-  const toggleDogList = () => {
-    const htmlStr = user.dogs.map((dog,i) => {
-      return (
-        `<li>${dog.name} Age: ${dog.age}</li>`
-      )
-    })
-    Swal.fire({
-      title:'You adopted dog list',
-      html:`<ul>${htmlStr}</ul>`
-    })
-  }
 
-  const toggleSavedList = () => {
-    toggleSaved(!displaySaved)
-  }
   return (
-    <div className="m-8 flex flex-col">
-      <div className="flex justify-evenly">
-        <div>Hi, {user.name.toUpperCase()}</div>
-        <Button text="Saved" onClick={toggleSavedList} />
-        <Button text="your dogs" onClick={toggleDogList}/>
-        <Button text="log out" onClick={handleLogOut} />
-      </div>
-      <div>
-      {displaySaved ?
-      <div className="mx-6 w-3/4 text-sm flex justify-center items-center">
-        <div className="m-4 p-2 flex flex-col items-center border borede-1 w-max min-h-fit h-100">
-          <div className="text-right" onClick={() => toggleSaved(false)}>
-            <span className="text-xs cursor-pointer self-right">X</span>
+    <div className="border-1 top-0 bg-[#fdccce] fixed m-[-16px -20px 0px -20px] w-screen h-24 flex flex-col justify-center items-evenly shadow-md">
+
+      <div
+        className="flex flex-row justify-between font-medium text-slate-700 px-4 sm:px-16 items-center"
+      >
+        <div className=" flex flex-row justify-center items-center">
+          <div className="flex flex-col items-baseline">
+            <Image src="/logo-1.png" alt="small logo" className="mr-2 " width={50} height={50} />
+            <Image src="/slogan.png" alt="slogan" width={120} height={5}/>
           </div>
-          <div className="flex flex-row">
-          { !user.saved.length? <h1>{"You haven't save any dog yet."}</h1> : user.saved.map(dog =>
-          <li
-          className="mx-2 my-1 text-accent underline cursor-pointer hover:no-underline"
-          key={dog.id}
-          onClick={()=>handleDogClick(dog)}>{dog.name}</li>) }
-          </div>
-          <MatchDog dogs={user.saved} text="Pick one of my saved dogs"/>
+          <div className="capitalize"> Hi, <strong>{user.name}</strong></div>
         </div>
+        <div className="sm:hidden overflow-hidden">
+          <button onClick={() => toggleMenu(!menu)} className="">
+            <GiHamburgerMenu />
+          </button>
+        </div>
+        <div className={!menu ? "hidden" : "sm:hidden absolute top-14 right-0 block min-w-[110px] bg-slate-50/75 shadow-md"}>
+            {["filter", 'saved', 'adopt'].map((btn,i) =>
+            <div key={i} className={activeTab === `tab-${btn}` ? "menu_active menu_btn" : "menu_btn"}>
+              <a
+                onClick={() => {setTab(`tab-${btn}`); toggleMenu(false);}}
+                className="p-4"
+              >{btn}</a>
+            </div>
+            )}
+            <div className="menu_btn">
+            <a onClick={handleLogOut} className="p-4">Log Out</a>
+            </div>
+          </div>
+        <div className="max-[640px]:hidden w-1/2 flex flex-row justify-between n">
+        {["filter", 'saved', 'adopt'].map((btn,i) =>
+            <a
+              key={i}
+              className={activeTab === `tab-${btn}`? 'border-b-4 active_tab':'active_tab nav_hover'}
+             >
+             <button className="btn" onClick={() => setTab(`tab-${btn}`)}>
+               {btn}
+             </button>
+           </a>
+          )}
 
+        </div>
+        <a className={ 'active_tab'}>
+          <button
+           className="btn max-[640px]:hidden bg-rose-400 text-white/80 hover:bg-rose-300 hover:text-white"
+           onClick={handleLogOut}
+          >
+            log out
+          </button>
+        </a>
       </div>
-        : null}
-      </div>
-
     </div>
   )
 }

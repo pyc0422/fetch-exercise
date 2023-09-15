@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 import userEvent from "@testing-library/user-event"
 import Home from '../src/app/page'
-import Search from '@/Components/Search'
+import Search from '@/app/Search'
 import { StateType } from '@/utils/pototype'
 import { AppWrapper, AppContext } from '@/Components/AppContext'
 import { useContext } from 'react'

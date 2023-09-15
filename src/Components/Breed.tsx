@@ -12,7 +12,6 @@ export default function Breed () {
   const breedChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setFilter({...filter, breeds: e.target.value})
   }
-
   useEffect(() => {
     breedList()
   }, [])
@@ -31,19 +30,6 @@ export default function Breed () {
         {breeds.map((breed, i) =>(<option key={i} value={breed}>{breed}</option>))}
       </select>
     </div>
-    {/* <div className="flex flex-row mt-2">
-      {filter['breeds[]']==="" ? null : filter['breeds[]'].split(",").slice(1).map((bre, i) =>
-      <div key={i} className="mx-1 text-xs px-1 border border-1 w-fit">
-        <span
-          className="text-sm mr-2 px-1 hover:text-secondary hover:font-medium"
-          onClick={() => setFilter({...filter, 'breeds[]':filter['breeds[]'].replace(`,${bre}`,"")})}
-        >
-          X
-        </span>
-        {bre}
-      </div>
-      )}
-    </div> */}
   </div>
   )
 }

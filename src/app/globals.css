@@ -19,11 +19,47 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
+  /* color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
       transparent,
       rgb(var(--background-end-rgb))
     )
-    rgb(var(--background-start-rgb));
+    rgb(var(--background-start-rgb)); */
+
+
+}
+.homepage {
+  background: radial-gradient(
+    ellipse 100% 100% at 20% 13%,
+    #fdccce  50%,
+    40%,
+    transparent 40%
+  ),
+  conic-gradient(
+    at 60% 43%,
+    #fdccce  0.155turn,
+    transparent 0.155turn 0.845turn,
+    #fdccce 0.845turn
+  );
+}
+@layer utilities {
+  .menu_btn {
+    @apply capitalize my-1 text-sm block text-black text-left hover:bg-rose-400/20
+  }
+  .menu_active {
+    @apply bg-rose-400/50
+  }
+  .btn {
+    @apply capitalize text-base py-1  px-4 rounded
+  }
+  .btn_hover {
+    @apply hover:opacity-80 active:opacity-100
+  }
+  .nav_hover {
+    @apply hover:opacity-80 hover:-translate-y-2 hover:scale-110 duration-200
+  }
+  .active_tab {
+    @apply border-rose-400 transition ease-in-out delay-75
+  }
 }
