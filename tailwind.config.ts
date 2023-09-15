@@ -14,6 +14,13 @@ const config: Config = {
         'secondary': '#F9A826',
         'accent': '#3E4E62',
       },
+      keyframes: {
+        wiggle: {
+          '0%, 100%':{transofrm: 'left 0'},
+          '33%':{transforma: 'left 10px'},
+          '64%':{transform: 'right 10px'}
+        }
+      }
 
     },
   },

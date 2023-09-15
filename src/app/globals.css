@@ -19,11 +19,27 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
+  /* color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
       transparent,
       rgb(var(--background-end-rgb))
     )
-    rgb(var(--background-start-rgb));
+    rgb(var(--background-start-rgb)); */
+
+
+}
+.homepage {
+  background: radial-gradient(
+    ellipse 100% 100% at 20% 13%,
+    #fdccce  50%,
+    40%,
+    transparent 40%
+  ),
+  conic-gradient(
+    at 60% 43%,
+    #fdccce  0.155turn,
+    transparent 0.155turn 0.845turn,
+    #fdccce 0.845turn
+  );
 }

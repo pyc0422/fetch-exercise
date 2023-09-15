@@ -9,29 +9,35 @@ type StateType = {
   setUser(user: UserType): void;
   filter: FilterType;
   setFilter(filter:FilterType):void;
+  activeTab:string;
+  setTab(activeTab:string):void;
 };
+
 const initialState = {
   user:{name:"", email:"", login:false, dogs:[], saved:[]},
   setUser: () => {},
   filter:{breeds:"", min:"0", max:"0", size:"", feild:"Breed", method:"asc"},
-  setFilter:() => {}
+  setFilter:() => {},
+  activeTab:"tab-filter",
+  setTab: () => {}
 }
 export const AppContext = createContext<StateType>(initialState);
 
-const useApp = () : StateType=> {
-  const context = useContext(AppContext);
-  if (!context) {
-    throw new Error("No app context")
-  }
-  return context;
-}
+// const useApp = () : StateType=> {
+//   const context = useContext(AppContext);
+//   if (!context) {
+//     throw new Error("No app context")
+//   }
+//   return context;
+// }
 export function AppWrapper({children}: {
   children: React.ReactNode
 }) {
   const [user, setUser] = useState<UserType>(initialState.user)
   const [filter, setFilter] = useState<FilterType>(initialState.filter)
+  const [activeTab, setTab] = useState<string>("tab-filter")
   return (
-    <AppContext.Provider value = {{user, setUser, filter, setFilter}}>
+    <AppContext.Provider value = {{user, setUser, filter, setFilter, activeTab, setTab}}>
       {children}
     </AppContext.Provider>
   )
