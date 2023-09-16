@@ -26,7 +26,7 @@ https://github.com/pyc0422/fetch-exercise/assets/86500068/3c11ce2f-54a2-45f4-aff
 
 ### Search Page
 
-  - Users can filter dogs by breed (Based on the API error, it's not working yet)
+  - Users can filter dogs by breed
   - Users can filter dogs by setup preferent age range
   - Results are paginated for easy navigation
   - Results are sorted alphabetically by breed by default, users can set up their own preferences sort dogs by different field and method
@@ -47,6 +47,14 @@ https://github.com/pyc0422/fetch-exercise/assets/86500068/3c11ce2f-54a2-45f4-aff
 
 
   TypeScript, Next.js, React.js, TailwindCSS, Node.js, Fetch, Sweetalert, Jest, React Testing Library 
+
+## Performance
+
+<img width="389" alt="Screenshot 2023-09-15 at 8 02 57 PM" src="https://github.com/pyc0422/fetch-exercise/assets/86500068/f09861a3-1df0-48e6-b886-6a4bfdc3437e">
+
+<img width="381" alt="Screenshot 2023-09-15 at 8 03 06 PM" src="https://github.com/pyc0422/fetch-exercise/assets/86500068/da81816d-2f65-4292-b653-689822bef81d">
+
+
 
 ## Setup and Running
 
