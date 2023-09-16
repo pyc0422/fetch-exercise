@@ -1,6 +1,8 @@
-# Fetch Take-Home Project - Dog Lover
+# Dog Lover
 
-This repository contains my solution to the FE project. 
+![logo](https://github.com/pyc0422/fetch-exercise/assets/86500068/9c47c76d-6a69-49b3-851d-6d70a288e3ac)
+
+A website that helps dog lover to adopt dogs.
 
 Welcome to try my deployed live version -> [https://fetch-dog-lover.vercel.app/](https://fetch-dog-lover.vercel.app/)
 
@@ -8,7 +10,11 @@ Iphone still have 401 error after login. I'm still fixing it yet.
 
 ## Project Review
 
-Fetch required us to building a web application that allows users to explore avaliable dogs from their database and create matches based on the users preferences. The application consists of 2 main sections: the Login Screen and the Search Page.
+Users can explore avaliable dogs from database and create matches based on the users preferences. The application consists of 2 main sections: the Login Screen and the Search Page.
+
+
+https://github.com/pyc0422/fetch-exercise/assets/86500068/3c11ce2f-54a2-45f4-aff8-cbad6150c696
+
 
 ## Features
 
