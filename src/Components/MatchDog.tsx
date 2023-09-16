@@ -14,7 +14,7 @@ export default function MatchDog () {
       })
       return;
     }
-    const Ids = user.dogs.map(dog => dog.id)
+    const Ids = user.saved.map(dog => dog.id)
     const res = await getMatch(Ids)
     if (typeof res === 'number') {
       Swal.fire({
@@ -24,7 +24,7 @@ export default function MatchDog () {
         confirmButtonText: 'Reset the search condition'
       })
     } else {
-      const matched:Dog | undefined = user.dogs.find(dog => dog.id === res.match)
+      const matched:Dog | undefined = user.saved.find(dog => dog.id === res.match)
       if (matched) {
         const detailHtml =
         `<div className="px-2">
