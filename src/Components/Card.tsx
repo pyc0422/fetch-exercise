@@ -10,7 +10,6 @@ export default function Card ({dog, heart, click}: {dog:Dog, heart?:boolean, cli
   const [isLike, toggleLike] = useState(false)
   useEffect(() => {
     if (user.saved.filter(item => item.name === dog.name).length > 0) {
-      console.log(user.saved.filter(item => item.name === dog.name).length)
       toggleLike(true)
     } else {
       toggleLike(false)
@@ -25,8 +24,11 @@ export default function Card ({dog, heart, click}: {dog:Dog, heart?:boolean, cli
       showCancelButton: true,
       showConfirmButton:click,
       confirmButtonText:'Adopt',
+      showDenyButton: isLike,
+      denyButtonText:'Unsaved',
       cancelButtonText:'Back'
     }).then((result)=>{
+      console.log(result)
       if (result.isConfirmed) {
         const dogSet = new Set(user.dogs)
         if (dogSet.has(dog)) {
@@ -39,11 +41,18 @@ export default function Card ({dog, heart, click}: {dog:Dog, heart?:boolean, cli
           setUser({...user, dogs:user.dogs.concat(dog), saved:user.saved.filter(cur => cur.id !== dog.id)})
           return 'adopted'
         }
+      } else if (result.isDenied){
+        console.log('denied')
+        setUser({...user, saved: user.saved.filter(item => item.id !== dog.id)})
+        return 'delete'
       }
     })
     .then((res) => {
-      if (res) {
-        Swal.fire(`${dog.name.toUpperCase()}!`, "", "success")
+      if (res === 'adopted') {
+        Swal.fire(`Adopted ${dog.name.toUpperCase()} successfully!`, "", "success")
+      } else if (res === 'delete') {
+        toggleLike(false)
+        Swal.fire(`Removed ${dog.name.toUpperCase()} successfully!`, "", "success")
       }
 
     })

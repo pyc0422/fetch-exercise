@@ -2,9 +2,9 @@ import LogIn from "../Components/Login"
 import Image from "next/image"
 export default function HomePage () {
   return (
-    <div className="w-screen h-screen homepage top-0 flex justify-center">
-      <div className="flex flex-row justify-evenly items-center">
-        <div className="flex flex-col items-center">
+    <div className="pt-10 sm:pt-0 w-screen h-screen homepage sm:top-0 sm:flex sm:justify-center">
+      <div className="flex flex-col sm:flex-row justify-center sm:justify-evenly items-center">
+        <div className="sm:pl-10 flex flex-col items-center justify-center">
           <Image src="/logo.png" alt="logo" width={300} height={50}/>
           <LogIn />
         </div>
