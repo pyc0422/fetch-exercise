@@ -28,7 +28,6 @@ export default function Card ({dog, heart, click}: {dog:Dog, heart?:boolean, cli
       denyButtonText:'Unsaved',
       cancelButtonText:'Back'
     }).then((result)=>{
-      console.log(result)
       if (result.isConfirmed) {
         const dogSet = new Set(user.dogs)
         if (dogSet.has(dog)) {
@@ -42,7 +41,6 @@ export default function Card ({dog, heart, click}: {dog:Dog, heart?:boolean, cli
           return 'adopted'
         }
       } else if (result.isDenied){
-        console.log('denied')
         setUser({...user, saved: user.saved.filter(item => item.id !== dog.id)})
         return 'delete'
       }

@@ -22,7 +22,6 @@ export default function Header ({Ids, dogs}:{Ids:string[], dogs:Array<Dog>}) {
 
   return (
     <div className="border-1 top-0 bg-[#fdccce] fixed m-[-16px -20px 0px -20px] w-screen h-24 flex flex-col justify-center items-evenly shadow-md">
-
       <div
         className="flex flex-row justify-between font-medium text-slate-700 px-4 sm:px-16 items-center"
       >

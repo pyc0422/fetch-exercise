@@ -15,7 +15,6 @@ export default function HomePage () {
          priority
          width={700}
          height={900}
-
          />
         </div>
 
